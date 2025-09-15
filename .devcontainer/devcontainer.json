@@ -1,0 +1,28 @@
+{
+  "name": "Next Blog Practice",
+
+  // 既存の docker-compose.yaml を使用
+  "dockerComposeFile": "./docker-compose.yaml",
+
+  // docker-compose.yaml の app サービスを使用
+  "service": "app",
+
+  // コンテナ内の作業ディレクトリ
+  "workspaceFolder": "/app",
+
+  // VSCode の拡張機能とエディタ設定
+  "customizations": {
+    "vscode": {
+      // コンテナ内にインストールする拡張機能
+      "extensions": [],
+
+      // エディタ設定
+      "settings": {
+        "typescript.tsdk": "node_modules/typescript/lib"
+      }
+    }
+  },
+  "features": {
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+  }
+}

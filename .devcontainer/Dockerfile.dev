@@ -1,0 +1,20 @@
+# 開発用Dockerfile（マルチステージの旨みがないがとりあえずマルチステージで）
+# 依存パッケージのインストール
+FROM node:24.8.0-slim as deps
+
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+RUN yarn install
+
+# 実行環境
+FROM node:24.8.0-slim
+
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY . ./
+
+EXPOSE 3000
+
+CMD ["/bin/bash","entrypoint.sh"]
