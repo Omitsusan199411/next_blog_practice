@@ -5,3 +5,9 @@
 ## devcontainer起動方法
 1. `cmd + shift + p`でコマンドパレットを開く
 2. `Dev Containers: Reopen in Container`で検索し、選択する
+
+## コンテナ削除コマンと
+```sh
+docker rm -f `docker ps -a -q`
+docker system prune --all --volumes
+```
