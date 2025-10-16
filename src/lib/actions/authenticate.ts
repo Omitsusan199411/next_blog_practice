@@ -3,13 +3,24 @@
 
 import { signIn } from '@/auth'
 import { AuthError } from 'next-auth'
+import { redirect } from "next/navigation";
 
 export async function authenticate(
 	prevState: string | undefined,
 	formData: FormData,
 ) {
 	try {
-		await signIn('credentials', formData);
+		// 'credentials'はauth.tsで定義したCredentialsプロバイダーを指定する識別子
+		// NextAuthは複数の認証プロバイダー（Google、GitHub、メール/パスワードなど）をサポートしており、
+		// どのプロバイダーを使用するかを第1引数で指定する
+		// この'credentials'は、auth.tsの providers: [Credentials({ ... })] に対応している
+		await signIn('credentials', {
+			...Object.fromEntries(formData),
+			redirect: false // NextAuthの自動リダイレクトを無効化する。（dashboardにリダイレクトさせるため）
+		});
+
+		redirect('/dashboard');
+
 	} catch (error) {
 		if (error instanceof AuthError) {
 			switch (error.type) {

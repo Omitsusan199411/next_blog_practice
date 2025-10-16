@@ -1,4 +1,4 @@
-// 認証用の設定ファイル
+// NextAuthが使用する認証用の設定ファイル
 import type { NextAuthConfig } from "next-auth";
 
 export const authConfig = {
@@ -12,7 +12,7 @@ export const authConfig = {
 			const isOnDashboard = nextUrl.pathname.startsWith('/dashboard') || nextUrl.pathname.startsWith('/manage'); // ログインが必要なURLを指定
 			if (isOnDashboard) {
 				if (isLoggedIn) return true;
-				return false;
+				return Response.redirect(new URL('/login', nextUrl));
 			} else if (isLoggedIn && nextUrl.pathname === '/login') { // 既にログインしている、かつloginページにアクセスした場合は、dashboardにリダイレクト
 				return Response.redirect(new URL('/dashboard', nextUrl))
 			}
