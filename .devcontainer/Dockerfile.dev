@@ -5,7 +5,7 @@ FROM node:24.8.0-slim as deps
 WORKDIR /app
 
 COPY package.json yarn.lock ./
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 # 実行環境
 FROM node:24.8.0-slim
