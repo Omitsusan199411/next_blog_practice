@@ -12,11 +12,11 @@ async function getUser(email: string) { // prismaを使ってユーザーを取�
 	})
 }
 
-export const { auth, signIn, signOut, handlers} = NextAuth({
-	...authConfig,
+export const { auth, signIn, signOut } = NextAuth({
+	...authConfig, // auth.config.tsの設定内容を取り込む
 	providers: [
 		Credentials({
-			async authorize(credentials) {
+			async authorize(credentials) { // 引数のcredentialsはログインフォームから送られてきたデータ（メールアドレスとパスワード）
 				const parsedCredentials = z.object(
 					{
 						email: z.string().email(),
@@ -25,11 +25,11 @@ export const { auth, signIn, signOut, handlers} = NextAuth({
 				)
 				.safeParse(credentials); // credentialsに対して、safeParseでバリデーションを実行（バリデーションに失敗してもエラーをスローせずに結果のオブジェクトを返す）
 
-				if (parsedCredentials.success) {
+				if (parsedCredentials.success) { // バリデーションに成功した場合は、メールアドレスからユーザー情報を取得し、パスワードを照合する
 					const { email, password } = parsedCredentials.data;
-					const user = await getUser(email); // ユーザーを取得
+					const user = await getUser(email); // ユーザーをDBから取得
 					if (!user) return null;
-					const passwordsMatch = await bcryptjs.compare(password, user.password); // パスワードの照合
+					const passwordsMatch = await bcryptjs.compare(password, user.password); // パスワードの照合。ハッシュ化された状態で比較
 					if (passwordsMatch) return user; // パスワードが一致した場合はユーザーを返す
 				}
 				return null; // パスワードが一致しない場合はnullを返す
