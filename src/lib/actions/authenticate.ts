@@ -15,7 +15,7 @@ export async function authenticate(
 		// どのプロバイダーを使用するかを第1引数で指定する
 		// この'credentials'は、auth.tsの providers: [Credentials({ ... })] に対応している
 		await signIn('credentials', {
-			...Object.fromEntries(formData),
+			...Object.fromEntries(formData), // formDataオブジェクトをjavascriptのオブジェクトに変換する
 			redirect: false // NextAuthの自動リダイレクトを無効化する。（dashboardにリダイレクトさせるため）
 		});
 
