@@ -5,5 +5,5 @@ export default NextAuth(authConfig).auth; // NextAuthを初期化。authプロ�
 
 export const config = {
 	matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
-  	runtime: 'nodejs',
+	runtime: 'nodejs',
 }
