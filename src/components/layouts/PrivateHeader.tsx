@@ -1,7 +1,7 @@
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu"
 import Link from "next/link";
 import Setting from "./Setting";
-import { auth, signOut } from "@/auth";
+import { auth } from "@/auth";
 
 export default async function PrivateHeader() {
 	const session = await auth();

@@ -1,10 +1,11 @@
-'use sever'
+'use server'
 
 import { registerSchema } from "@/validations/user"
 import { prisma } from "@/lib/prisma";
 import bcryptjs from "bcryptjs";
 import { signIn } from "@/auth";
 import { redirect } from "next/navigation";
+import { ZodError } from "zod";
 
 type ActionState = {
 	success: boolean,
@@ -12,9 +13,12 @@ type ActionState = {
 }
 
 // バリデーションの結果、失敗した場合の処理
-function handleValidationError(error: any): ActionState {
+function handleValidationError(error: ZodError): ActionState {
 	// zodの仕様でパスワード一致確認のエラー（refine((data) => data.password === data.confirmPassword）はformErrorsで渡ってくるので注意！
 	const { fieldErrors, formErrors } = error.flatten();
+
+	// fieldErrorsにundefinedが入らないようにアサーション
+	const createdFieldErrors = fieldErrors as Record<string, string[]>
 
 	// formErrorsがある場合は、confirmPasswordフィールドにエラーを追加
 	if (formErrors.length > 0) {
@@ -23,7 +27,7 @@ function handleValidationError(error: any): ActionState {
 		}
 	}
 	return {
-		success: false, errors: fieldErrors
+		success: false, errors: createdFieldErrors
 	}
 }
 
