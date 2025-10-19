@@ -35,5 +35,15 @@ export const { auth, signIn, signOut } = NextAuth({
 				return null; // パスワードが一致しない場合はnullを返す
 			}
 		}) // メールアドレス/パスワードを使ったカスタム認証を有効化（サインイン機能の追加）
-	]
+	],
+	callbacks: {
+		async session( { session, token } ) {
+			if (session.user) {
+				session.user.id = (token.id || token.sub) as string;
+				session.user.name = token.name ?? ''
+				session.user.email = token.email ?? ''
+			}
+			return session;
+		}
+	}
 });
