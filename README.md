@@ -12,3 +12,6 @@ docker rm -f `docker ps -a -q`
 docker system prune --all
 docker volume rm $(docker volume ls -q)
 ```
+## Playwright MCPでのE2Eテスト
+1. 新しいエディターを開く（ローカル環境から実行すること）
+2. e2e-test-prompts.mdがテスト項目になるので、e2e-test-prompts.mdをエージェントに読み込ませる
