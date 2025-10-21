@@ -24,5 +24,10 @@
   },
   "features": {
     "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
-  }
+  },
+
+  // コンテナ起動時に実行するコマンド（開発サーバーを起動）
+  "postStartCommand": ".devcontainer/entrypoint.sh",
+
+  "forwardPorts": [3001]
 }

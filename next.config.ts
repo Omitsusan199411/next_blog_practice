@@ -15,6 +15,9 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "5mb", // デフォルトは1MBなので5MBに増やす
     },
   },
+  server: {
+    port: 3001,
+  },
 };
 
 export default nextConfig;
