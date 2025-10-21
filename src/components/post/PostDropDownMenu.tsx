@@ -17,17 +17,17 @@ export default function PostDropDownMenu({postId}: {postId: string}) {
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="end" className="w-48">
 					<DropdownMenuItem asChild>
-						<Link href={`/posts/${postId}`} className="cursor-pointer">
+						<Link href={`manage/posts/${postId}`} className="cursor-pointer">
 							詳細
 						</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem asChild>
-						<Link href={`/posts/edit/${postId}`} className="cursor-pointer">
+						<Link href={`manage/posts/${postId}/edit`} className="cursor-pointer">
 							編集
 						</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem className="text-red-600">
-						<Link href={`/posts/delete/${postId}`} className="cursor-pointer">
+						<Link href={`manage/posts/delete/${postId}`} className="cursor-pointer">
 							削除
 						</Link>
 					</DropdownMenuItem>
