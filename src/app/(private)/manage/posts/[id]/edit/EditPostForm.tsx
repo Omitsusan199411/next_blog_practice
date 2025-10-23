@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useActionState, useEffect } from 'react';
-import { createPost } from "@/lib/actions/createPost";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
