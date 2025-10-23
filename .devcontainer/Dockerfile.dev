@@ -18,3 +18,4 @@ COPY . ./
 # EXPOSE 3001　　// devcontainerの機能のポートフォワードが優先されるのでコメントアウト
 
 # CMD ["/bin/bash","./.devcontainer/entrypoint.sh"] // devcontainerのpostStartCommandでentrypoint.shを実行するのでコメントアウト
+CMD ["sleep", "infinity"] // メインプロセスが終了するとコンテナ自体も終了するため、無限ループで待ち続ける
