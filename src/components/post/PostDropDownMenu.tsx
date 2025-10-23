@@ -23,6 +23,8 @@ export default function PostDropDownMenu({postId}: {postId: string}) {
 
 	return (
 		<>
+		{/* open={isDropdownOpen} は現在のドロップダウンメニューの開閉状態を表す*/}
+		{/* ドロップダウンが開かれた時にonOpenChange関数の引数としてtrueが渡される。閉じるとfalseが渡される */}
 			<DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
 				<DropdownMenuTrigger className="px-2 py-1 border rounded-md cursor-pointer">
 					•••

@@ -10,6 +10,8 @@ type DeletePostProps = {
 
 export default function DeletePostDialog({postId, isOpen, onOpenChange}: DeletePostProps) {
   return (
+	// open={isOpen}は現在のダイアログの開閉状態を表す
+	// onOpenChange関数の引数としてisOpenの値が渡される。onOpenChange関数はPostDropDownMenuコンポーネントのhandleDeleteDialogChange関数を呼び出す
 	<AlertDialog open={isOpen} onOpenChange={onOpenChange}>
 		<AlertDialogContent>
 			<AlertDialogHeader>
