@@ -1,12 +1,12 @@
-import { PrismaClient } from "@prisma/client";
-import * as bcrypt from "bcryptjs";
+import { PrismaClient } from "@prisma/client"
+import * as bcrypt from "bcryptjs"
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 async function main() {
 	// クリーンアップ
-	await prisma.user.deleteMany();
-	await prisma.post.deleteMany();
+	await prisma.user.deleteMany()
+	await prisma.post.deleteMany()
 
 	const hashedPassword = await bcrypt.hash("password123", 12) // ハッシュ化
 	const dummyImages = [
@@ -22,29 +22,30 @@ async function main() {
 			password: hashedPassword,
 			posts: {
 				create: [
-				{
-					title: "初めてのブログ投稿",
-					content: "これは最初のブログ投稿です。",
-					topImage: dummyImages[0],
-					published: true
-				},
-				{
-					title: "2つ目のブログ投稿",
-					content: "これは2つ目のブログ投稿です。",
-					topImage: dummyImages[1],
-					published: true,
-				}
-			]
-			}
-		}
+					{
+						title: "初めてのブログ投稿",
+						content: "これは最初のブログ投稿です。",
+						topImage: dummyImages[0],
+						published: true,
+					},
+					{
+						title: "2つ目のブログ投稿",
+						content: "これは2つ目のブログ投稿です。",
+						topImage: dummyImages[1],
+						published: true,
+					},
+				],
+			},
+		},
 	})
-	console.log( { user } )
+	console.log({ user })
 }
 
-main().catch((e) => { 
-	console.error(e);
-	process.exit(1);
-})
-.finally(async () => {
-	await prisma.$disconnect();
-})
+main()
+	.catch((e) => {
+		console.error(e)
+		process.exit(1)
+	})
+	.finally(async () => {
+		await prisma.$disconnect()
+	})

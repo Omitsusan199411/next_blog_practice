@@ -1,11 +1,12 @@
 // ログインしているユーザーが投稿した記事のみを取得するロジック
 
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma"
 
-export async function getOwnPosts(userId: string) { // ログインしているユーザーのIDを引数に受ける（sessionから取得する）
+export async function getOwnPosts(userId: string) {
+	// ログインしているユーザーのIDを引数に受ける（sessionから取得する）
 	return await prisma.post.findMany({
 		where: {
-			authorId: userId
+			authorId: userId,
 		},
 		select: {
 			id: true,
@@ -14,7 +15,7 @@ export async function getOwnPosts(userId: string) { // ログインしている�
 			updatedAt: true,
 		},
 		orderBy: {
-			updatedAt: "desc"
-		}
+			updatedAt: "desc",
+		},
 	})
 }

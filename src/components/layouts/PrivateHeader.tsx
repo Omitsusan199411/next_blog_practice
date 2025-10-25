@@ -1,10 +1,15 @@
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu"
-import Link from "next/link";
-import Setting from "./Setting";
-import { auth } from "@/auth";
+import { auth } from "@/auth"
+import {
+	NavigationMenu,
+	NavigationMenuItem,
+	NavigationMenuLink,
+	NavigationMenuList,
+} from "@/components/ui/navigation-menu"
+import Link from "next/link"
+import Setting from "./Setting"
 
 export default async function PrivateHeader() {
-	const session = await auth();
+	const session = await auth()
 	if (!session?.user?.email) throw new Error("不正なリクエストです")
 
 	return (
@@ -15,7 +20,10 @@ export default async function PrivateHeader() {
 						<NavigationMenuItem>
 							{/* 本来、shadcn/uiのNavigationMenuLinkとNext.jsのLinkを併用すると<a>タグが二重で生成されてしまうため、asChildを使用して<a>タグを１つにマージする。 これによりshadcn/uiのNavigationMenuLinkの機能を利用しつつ、Next.jsのLinkの機能（リンク先のプリフェッチ）を利用できる。 */}
 							<NavigationMenuLink asChild>
-								<Link href="/dashboard" className="font-bold text-xl">
+								<Link
+									href="/dashboard"
+									className="font-bold text-xl"
+								>
 									管理ページ
 								</Link>
 							</NavigationMenuLink>

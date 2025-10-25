@@ -1,13 +1,13 @@
 import { auth } from "@/auth"
-import { notFound } from "next/navigation"
 import { getOwnPost } from "@/lib/ownPost"
-import EditPostForm from "./EditPostForm" 
+import { notFound } from "next/navigation"
+import EditPostForm from "./EditPostForm"
 
 type PageProps = {
-	params: Promise<{id: string}>
+	params: Promise<{ id: string }>
 }
 
-export default async function EditPage({params}: PageProps) {
+export default async function EditPage({ params }: PageProps) {
 	const { id } = await params
 	const session = await auth()
 	const userId = session?.user?.id
@@ -22,10 +22,9 @@ export default async function EditPage({params}: PageProps) {
 		notFound()
 	}
 
-  return (
-	<div>
-		<EditPostForm post={post} />
-	</div>
-  )
+	return (
+		<div>
+			<EditPostForm post={post} />
+		</div>
+	)
 }
-

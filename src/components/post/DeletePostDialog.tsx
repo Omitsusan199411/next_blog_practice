@@ -1,32 +1,49 @@
-import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog"
-import { deletePost } from "@/lib/actions/deletePost";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
+import { deletePost } from "@/lib/actions/deletePost"
 
 type DeletePostProps = {
-	postId: string;
-	isOpen: boolean;
+	postId: string
+	isOpen: boolean
 	onOpenChange: (open: boolean) => void
 }
 
-
-export default function DeletePostDialog({postId, isOpen, onOpenChange}: DeletePostProps) {
-  return (
-	// open={isOpen}は現在のダイアログの開閉状態を表す
-	// onOpenChange関数の引数としてisOpenの値が渡される。onOpenChange関数はPostDropDownMenuコンポーネントのhandleDeleteDialogChange関数を呼び出す
-	<AlertDialog open={isOpen} onOpenChange={onOpenChange}>
-		<AlertDialogContent>
-			<AlertDialogHeader>
-				<AlertDialogTitle>記事の削除</AlertDialogTitle>
-				<AlertDialogDescription>
-					この記事を削除しても良いですか？
-					<br />
-					この操作は取り消せません。
-				</AlertDialogDescription>
-			</AlertDialogHeader>
-			<AlertDialogFooter>
-				<AlertDialogCancel>キャンセル</AlertDialogCancel>
-				<AlertDialogAction onClick={() => deletePost(postId)} className="bg-red-500 hover-bg-red-600">削除</AlertDialogAction>
-			</AlertDialogFooter>
-		</AlertDialogContent>
-	</AlertDialog>
-  )
+export default function DeletePostDialog({
+	postId,
+	isOpen,
+	onOpenChange,
+}: DeletePostProps) {
+	return (
+		// open={isOpen}は現在のダイアログの開閉状態を表す
+		// onOpenChange関数の引数としてisOpenの値が渡される。onOpenChange関数はPostDropDownMenuコンポーネントのhandleDeleteDialogChange関数を呼び出す
+		<AlertDialog open={isOpen} onOpenChange={onOpenChange}>
+			<AlertDialogContent>
+				<AlertDialogHeader>
+					<AlertDialogTitle>記事の削除</AlertDialogTitle>
+					<AlertDialogDescription>
+						この記事を削除しても良いですか？
+						<br />
+						この操作は取り消せません。
+					</AlertDialogDescription>
+				</AlertDialogHeader>
+				<AlertDialogFooter>
+					<AlertDialogCancel>キャンセル</AlertDialogCancel>
+					<AlertDialogAction
+						onClick={() => deletePost(postId)}
+						className="bg-red-500 hover-bg-red-600"
+					>
+						削除
+					</AlertDialogAction>
+				</AlertDialogFooter>
+			</AlertDialogContent>
+		</AlertDialog>
+	)
 }
