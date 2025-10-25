@@ -33,7 +33,7 @@ export async function saveImageToLocal(file: File): Promise<string | null> {
 export async function saveImageToSupabase(file: File): Promise<string | null> {
 	const fileName = `${Date.now()}_${file.name}`;
 	const bucketName = process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NAME!;
-	const { data, error } = await supabase.storage.from(bucketName).upload(fileName, file, {
+	const { error } = await supabase.storage.from(bucketName).upload(fileName, file, {
 		cacheControl: "3600",
 		upsert: false
 	});
