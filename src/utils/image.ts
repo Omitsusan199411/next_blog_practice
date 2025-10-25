@@ -49,7 +49,7 @@ export async function saveImageToSupabase(file: File): Promise<string | null> {
 	//     publicUrl: "https://xxx/storage/v1/object/public/images/photo.jpg"
 	//   }
 	// }
-	const res = supabase.storage.from(bucketName).getPublicUrl(fileName); // supabaseのストレージの指定のバケットにアクセスして、指定したファイル名のパスを取得して、publicUrlDataに格納する。このとき、dataという変数で
+	const { data: publicUrlData } = await supabase.storage.from(bucketName).getPublicUrl(fileName); // supabaseのストレージの指定のバケットにアクセスして、指定したファイル名のパスを取得して、publicUrlDataに格納する。このとき、dataという変数で
 
-	return res.data.publicUrl;
+	return publicUrlData.publicUrl;
 }
